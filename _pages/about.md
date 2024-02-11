@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "academicpages is a ready-to-fork GitHub Pages template for academic personal websites"
+title: "About"
 excerpt: "About me"
 author_profile: true
 redirect_from: 
@@ -8,9 +8,30 @@ redirect_from:
   - /about.html
 ---
 
-This is the front page of a website that is powered by the [academicpages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the respository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. You can fork [this repository](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and markdown files, add your own PDFs and other content, and have your own site for free, with no ads! An older version of this template powers my own personal website at [stuartgeiger.com](http://stuartgeiger.com), which uses [this Github repository](https://github.com/staeiou/staeiou.github.io).
 
-A data-driven personal website
+<!-- ![Persian Fibonacci](/images/homepage_pic1.png){: .align-right width="300px"} -->
+<img src="/images/homepage_pic1.png" width="350" style="float:right">
+Greetings! My name is Hamid, and I currently hold the position of Senior Data Scientist within Walmart's Global Tech division. Following the completion of my Master's degree in Statistics from the University of Arkansas' Mathematics department, I embarked on my professional journey with Walmart in the summer of 2020, initially as an intern.  This opportunity quickly transitioned into a full-time role immediately following my internship. My work involves a variety of projects, including the development of recommendation systems through the use of computer vision, the creation of a scalable forecasting engine, demand forecasting utilizing deep learning models, and projects involving large language models and natural language processing (NLP). 
+
+
+Professional Experience in the Industry
+======
+
+In my role, I have spearheaded various impactful projects leveraging advanced technologies and methodologies. My expertise in Language Model Optimization, particularly with LLMs and NLP, was pivotal in a project for Walmart where I specialized in converting textual information into SQL code. This initiative significantly accelerated the provision of valuable insights to merchants by optimizing Language Model Models on Walmart datasets. 
+
+In another major endeavor, I led the Financial-Planning project for the Walmart Team, utilizing BigQuery, Cloud Computing, Tableau, Kubernetes, and Machine Learning Engineering skills. My leadership in this project produced ML-driven accurate quarterly forecasts for Omni Walmart departments, achieving remarkable outcomes including a quarterly saving of 4 million dollars and 152 hours per associate.
+
+Furthermore, my proficiency in TensorFlow and Spark was instrumental in the development of a deep learning sequence model aimed at predicting item-level forecasts at each store. This project was monumental, generating 540 million forecast units, which translates to a staggering 9 billion dollars annually. Additionally, I designed and implemented a forecasting framework/pipeline that automated geo-demand forecasts, showcasing my comprehensive skills in managing and executing complex projects that drive significant financial and operational efficiencies.
+
+
+Overview of My Academic Journey
+======
+
+From a young age, I've had a profound interest in mathematics, consistently achieving top marks in math and physics throughout my high school career. Working as a computer technician during my summers fueled my fascination with technology, leading me to self-study computer science fundamentals. In university, I was entrusted with managing a GPU server, an important role that not only enabled me to support my community, including researchers and graduate students, but also to author a significant paper on drug discovery using quantum mechanics.
+
+My journey brought me to the United States to pursue a PhD in computational biophysics, a field I found incredibly intriguing for its use of computer simulations to decode biological phenomena. Nonetheless, my enduring love for mathematics and my exceptional performance in graduate-level statistics courses steered me towards a scholarly path in statistics.
+
+<!-- A data-driven personal website
 ======
 Like many other Jekyll-based GitHub Pages templates, academicpages makes you separate the website's content from its form. The content & metadata of your website are in structured markdown files, while various other files constitute the theme, specifying how to transform that content & metadata into HTML pages. You keep these various markdown (.md), YAML (.yml), HTML, and CSS files in a public GitHub repository. Each time you commit and push an update to the repository, the [GitHub pages](https://pages.github.com/) service creates static HTML pages based on these files, which are hosted on GitHub's servers free of charge.
 
@@ -47,4 +68,4 @@ Example: editing a markdown file for a talk
 
 For more info
 ------
-More info about configuring academicpages can be found in [the guide](https://academicpages.github.io/markdown/). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+More info about configuring academicpages can be found in [the guide](https://academicpages.github.io/markdown/). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful. -->
