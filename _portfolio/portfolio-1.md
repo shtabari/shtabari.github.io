@@ -26,7 +26,7 @@ Integrating Large Language Models (LLM) into chatbots presents an innovative sol
 In summary, customer service is essential for businesses looking to increase customer satisfaction. By incorporating LLM-powered chatbots, companies can offer responsive, personalized, and efficient service, setting the foundation for long-term customer loyalty and sustained business success.
 
 
-<img src="/images/port-llm_rs.jpg" style="float:middle">
+<img src="/images/port-llm-rs.jpg" style="float:middle">
 
 
 Continuing from the significance of customer service in enhancing customer satisfaction, in the following post, we delve into how we can further augment customer service capabilities by leveraging Retrieval-Augmented Generation (RAG) techniques alongside cutting-edge technologies. This approach not only amplifies the benefits brought by LLM-powered chatbots but also introduces a new layer of efficiency and personalization in customer interactions.
