@@ -1,9 +1,10 @@
 ---
 title: "Customer Service Chatbot Improved with Retrieval-Augmented Generation Technology"
-excerpt: "In the this post, we explore the fusion of Large Language Models (LLM) with Retrieval-Augmented Generation (RAG) to revolutionize customer service applications. We detail how to create intuitive, interactive visualizations using Plotly Dash, enhance AI's understanding and response generation with LangChain, and ensure smooth deployment using Docker containers. The post also guides you through deploying the application on Google Cloud Platform (GCP) Cloud Run for scalable, efficient customer service solutions. This concise guide is essential for those looking to leverage cutting-edge AI and cloud technologies in customer service.<br/>
+excerpt: "In the this post, we explore the fusion of Large Language Models (LLM) with Retrieval-Augmented Generation (RAG) to revolutionize customer service applications. We detail how to create intuitive, interactive visualizations using streamlit, enhance AI's understanding and response generation with LangChain, and ensure smooth deployment using Docker containers. The post also guides you through deploying the application on Google Cloud Platform (GCP) Cloud Run for scalable, efficient customer service solutions. This concise guide is essential for those looking to leverage cutting-edge AI and cloud technologies in customer service.<br/>
 <br/><img src='/images/port-llm-image-main.png'>"
 collection: portfolio
 ---
+## [***Experience the Chatbot Application Here***](https://gitpage-llm-rag-st-avtdim7niq-uc.a.run.app/)
 
 Customer service stands as a critical pillar for businesses aiming to enhance customer satisfaction. It's not just about resolving issues; it's about creating a positive, endearing experience that leaves customers feeling valued and heard. In today's fast-paced world, where choices are plentiful and loyalty is hard-earned, businesses that prioritize customer service not only retain their customer base but also attract new ones through word-of-mouth and positive reviews.
 
@@ -37,7 +38,7 @@ To implement this advanced customer service solution, we use a combination of po
 
 - **Python:** The backbone of my development, Python allows us to write efficient, readable code for my chatbot, integrating LLM and RAG functionalities seamlessly.
 
-- **Dash App:** We leverage the Dash framework to create interactive, web-based dashboards that offer users a visually engaging way to interact with the chatbot. This enhances the user experience by making interactions simple, intuitive, and accessible.
+- **Streamlit App:** We leverage the Streamlit framework to create interactive, web-based dashboards that offer users a visually engaging way to interact with the chatbot. This enhances the user experience by making interactions simple, intuitive, and accessible.
 
 - **Docker Container:** By containerizing my application with Docker, we ensure that it can be deployed consistently and reliably across any environment. This facilitates easy scaling and updating of my service, making it robust and flexible.
 
@@ -47,9 +48,8 @@ To implement this advanced customer service solution, we use a combination of po
 
 By integrating these technologies with RAG techniques, we create a customer service solution that is not just reactive but also proactive in addressing customer needs. Stay tuned for the detailed post, where we will break down the implementation process, showcase real-world applications, and demonstrate the tangible benefits of my advanced customer service system.
 
-To see the advanced customer service solution in action, showcasing the integration of Retrieval-Augmented Generation techniques, Python, Dash app, Docker containers, GCP Cloud Run, and OpenAI GPT-3.5, visit my application running live on Google Cloud Platform:
+To see the advanced customer service solution in action, showcasing the integration of Retrieval-Augmented Generation techniques, Python, Streamlit app, Docker containers, GCP Cloud Run, and OpenAI GPT-3.5, visit my application running live on Google Cloud Platform:
 
-[***Experience the Chatbot Application Here***](https://gitpage-llm-rag-avtdim7niq-uc.a.run.app/)
 
 This link will take you directly to my interactive chatbot application, where you can witness firsthand the responsiveness, personalization, and efficiency of customer service solution. Engage with the chatbot to explore its capabilities and see how it leverages the latest in AI technology to deliver an unparalleled customer service experience.
 
@@ -110,64 +110,54 @@ Furthermore, our dataset includes tweets in languages other than English, which 
 | Customer: my apple music isn t working. Customer Service: let s look into that what issue are you experiencing with apple music.    |     
 
 
-We utilize Plotly Dash for developing the app's front-end. Below is the specified code.
+We utilize Streamlit for developing the app's front-end. Below is the specified code.
 
 ```python
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+import streamlit as st
+from llm_engine import llm_response
 
-app.layout = dbc.Container([
-    dbc.Row([
-        dbc.Col(html.H2("LLM Chatbot", className="text-center mb-4"), width=12)
-    ]),
-    dbc.Row([
-        dbc.Col(dcc.Textarea(id='user-input', placeholder='Type your message here...', style=CUSTOM_CSS["inputArea"]), width=9),
-        dbc.Col(dbc.Button('Send', id='send-button', n_clicks=0, style=CUSTOM_CSS["sendButton"]), width=3)
-    ], className="mb-3"),
-    dbc.Row([
-        dbc.Col(html.Div(id='chat-history', style=CUSTOM_CSS["chatDisplay"]), width=12)
-    ])
-], fluid=True)
+st.title("LLM ChatBot enhanced by RAG")
 
-@app.callback(
-    Output('chat-history', 'children'),
-    Input('send-button', 'n_clicks'),
-    State('user-input', 'value'),
-    State('chat-history', 'children')
-)
-def update_chat(n_clicks, user_message, chat_history):
-    if n_clicks > 0: #and user_message is not None:
-        if not user_message:
-            raise PreventUpdate
-        # bot_response = f"Bot: This is a simulated response to '{user_message}'"
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-        chat_history = [] if chat_history is None else chat_history
-        bot_response =  llm_response(user_message,chat_history) if n_clicks < 10 else "LLM reached quota limit"
-        bot_response = f"Bot: {bot_response} "
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-        new_chat_history = chat_history + [
-        html.Div([html.P(f"You: {user_message}"), html.P(f"{bot_response}")])
-        ]
-        return new_chat_history
-    return chat_history
+# Accept user input
+if prompt := st.chat_input("Welcome. How may I assist you ?"):
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    # Display user message in chat message container
+    with st.chat_message("user"):
+        st.markdown(prompt)
 
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        response = st.write_stream(llm_response(prompt,st.session_state.messages))
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": response})
 ```
 
 
-This Python Dash code outlines the structure and functionality of a simple web-based chat application using Dash by Plotly with Bootstrap for styling. Here's a breakdown of its key components and what they do:
+This Python code snippet is designed to create a chatbot application using Streamlit, a popular web app framework for machine learning and data science projects, and a hypothetical library or module named `llm_engine`, which seems to handle generating responses based on a large language model (LLM) enhanced by Retrieval-Augmented Generation (RAG).
 
-1. **Dash Application Initialization**: The application is initialized with Dash, specifying a name (`__name__`) and including an external Bootstrap stylesheet for theming and layout purposes.
+Key components and their functionality in the script include:
 
-2. **Layout Definition**: The application's layout is constructed using a container from Dash Bootstrap Components (`dbc.Container`). This container holds several rows (`dbc.Row`) and columns (`dbc.Col`), creating a structured layout for the chatbot interface.
+- **Streamlit UI Components**: The code utilizes Streamlit's UI components to create a web-based chat interface. `st.title` sets the title of the web app. `st.chat_message` and `st.markdown` are used to display chat messages and the assistant's responses in a structured format, enhancing user interaction.
 
-3. **Callback Function**: The `@app.callback` decorator is used to define the interaction logic of the application. This callback function updates the chat history based on the user's input and bot's response.
-   
-   - **Inputs and States**: The function is triggered by the "Send" button clicks (`Input('send-button', 'n_clicks')`). It also takes the current value of the user's input (`State('user-input', 'value')`) and the existing chat history (`State('chat-history', 'children')`) as states.
-   - **Function Logic**: When the button is clicked (i.e., `n_clicks > 0`), the function checks if the user's message is not empty. If it is empty, it prevents the update to avoid adding blank messages to the chat history.
-       - If there's a valid message, it calculates the bot's response. If the number of clicks is less than 10, it calls `llm_response(user_message, chat_history)` to generate a response based on the user's message and current chat history. Otherwise, it indicates that the LLM quota limit has been reached.
-       - The bot's response is prefixed with "Bot: " for clarity in the chat history.
-       - The chat history is updated by appending the new user message and bot response, formatted within `html.Div` and `html.P` tags for proper display.
+- **Session State Management**: Streamlit's `session_state` is employed to maintain a persistent chat history across reruns of the app. This feature ensures that previous conversations are not lost when the app is refreshed or updated, providing continuity in the chat experience.
 
-The chat application is designed to simulate conversations with a chatbot, updating the chat history with each interaction. The use of Dash Bootstrap Components facilitates a responsive and aesthetically pleasing interface, while the callback function manages the logic for receiving user input, generating bot responses, and updating the chat history dynamically.
+- **User Input Handling**: The application accepts user input through `st.chat_input`, a method for rendering a chat input box in the Streamlit app. This input is then added to the session state as part of the chat history.
+
+- **Response Generation**: Upon receiving user input, the code interacts with the `llm_engine.llm_response` function, passing the user's prompt and the current chat history. This function is likely responsible for generating responses based on the input prompt and any relevant context from the chat history. The generated response is displayed using Streamlit's UI components and is also added to the chat history for future reference.
+
+- **Dynamic Content Update**: As users interact with the chatbot, their messages and the assistant's responses are dynamically added to the chat interface, providing an interactive and engaging user experience.
+
+In summary, the code snippet outlines the foundation for a web-based chatbot application that leverages Streamlit for UI presentation and an LLM enhanced by RAG for generating contextually relevant responses, with a focus on maintaining a continuous and dynamic chat history.
 
 
 In the following section, we will explore the `llm_response` method, which is imported from the `llm_engine.py` file. The Langchain package has been selected for constructing the LLM engine.
